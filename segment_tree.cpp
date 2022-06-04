@@ -59,7 +59,7 @@ struct segmenttree
 		build(0, n - 1, 0, v);
 	}
 
-	int query(int l, int r) {
+    int query(int l, int r) {
 		return query(0, n - 1, l, r, 0);
 	}
 
