@@ -36,6 +36,25 @@ struct segmenttree
         return q1 + q2;
     }
 
+    void update(int left,int right,int node,int index,int val)
+    {
+        if(left == right)
+        {
+            st[node] = val;
+            return;
+        }
+        int mid = (left+right)/2;
+        if(index<=mid)
+        {
+            update(left,mid,node*2+1,index,val);
+        }
+        else
+        {
+            update(mid+1,right,node*2+2,index,val);
+        }
+        st[node] = st[node*2+1] +st[node*2+2]; 
+    }
+
     void build(vector<int> &v) {
 		build(0, n - 1, 0, v);
 	}
@@ -43,6 +62,10 @@ struct segmenttree
 	int query(int l, int r) {
 		return query(0, n - 1, l, r, 0);
 	}
+
+    void update(int ind,int val){
+        return update(0,n-1,0,ind,val) ;       
+    }
 
 
 };
@@ -53,20 +76,16 @@ int main()
 	// cout << v.size();
 
 	segmenttree tree;
-
 	tree.init(v.size());
 
 	tree.build(v);
     // vector<int> t = tree.st;
 
 	cout << tree.query(0, 4) << '\n';
-
+    tree.update(4, 10);
 	
 
-	cout << tree.query(2, 6) << '\n';
-
-	
-
+	// cout << tree.query(2, 6) << '\n';
 	cout << tree.query(0, 4) << '\n';
 
 	return 0;
