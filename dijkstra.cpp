@@ -19,6 +19,7 @@ public:
             int wt   = times[i][2];
             adj[src].push_back({dest,wt});
         }
+
         while(!gr.empty())
         {
             auto ele = gr.begin();
